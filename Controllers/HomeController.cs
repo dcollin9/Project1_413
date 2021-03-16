@@ -23,6 +23,46 @@ namespace Group1_7_Project1_IS413.Controllers
             return View();
         }
 
+        public IActionResult Signups()
+        {
+            if (ModelState.IsValid)
+            {
+                //Bring in the schedule of availability
+                return View(new ScheduleViewModel
+                {
+                    Project = _repository.Schedule
+                    .Where(s => available == false)
+                    .OrderbBy(s => Time)
+                })
+            }
+        }
+        public IActionResult Form()
+        {
+            if (ModelState.IsValid)
+            {
+                //Bring in the schedule of availability
+                return View(new ScheduleViewModel
+                {
+                    Schedule = _repository.Schedule
+                    .Where(s => available == false)
+                    .OrderbBy(s => Date && Time)
+                })
+            }
+        }
+        public IActionResult ViewAppointments ()
+        {
+            if (ModelState.IsValid)
+            {
+                //Bring in the schedule of availability
+                return View(new ScheduleViewModel
+                {
+                    Schedule = _repository.Schedule
+                    .Where(s => available == false)
+                    .OrderbBy(s => Date && Time)
+                })
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();
