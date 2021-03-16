@@ -9,7 +9,7 @@ namespace Group1_7_Project1_IS413.Models
     {
         new Tour
         {
-            Day = "Monday", 
+            Date = "Monday", 
             Time = "8:00 AM"
         }
         new Tour

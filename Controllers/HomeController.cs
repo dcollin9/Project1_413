@@ -13,9 +13,11 @@ namespace Group1_7_Project1_IS413.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private ITourRepository _repository;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _repository = _repository;
         }
 
         public IActionResult Index()
@@ -28,9 +30,9 @@ namespace Group1_7_Project1_IS413.Controllers
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new ScheduleViewModel
+                return View(new TourViewModel
                 {
-                    Project = _repository.Schedule
+                    Tours = _repository.Tours
                     .Where(s => available == false)
                     .OrderbBy(s => Time)
                 })
@@ -41,11 +43,11 @@ namespace Group1_7_Project1_IS413.Controllers
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new ScheduleViewModel
+                return View(new TourViewModel
                 {
-                    Schedule = _repository.Schedule
+                    Schedule = _repository.Tours
                     .Where(s => available == false)
-                    .OrderbBy(s => Date && Time)
+                    .OrderbBy(s => Time)
                 })
             }
         }
