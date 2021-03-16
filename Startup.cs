@@ -1,6 +1,8 @@
+using Group1_7_Project1_IS413.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Group1_7_Project1_IS413
 {
@@ -24,6 +27,11 @@ namespace Group1_7_Project1_IS413
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<TourDbContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:TourConnection"]);
+            });
+            services.AddScoped<ITourRepository, EFTourRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,5 +61,6 @@ namespace Group1_7_Project1_IS413
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

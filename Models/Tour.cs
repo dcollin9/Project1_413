@@ -10,8 +10,6 @@ namespace Group1_7_Project1_IS413.Models
     {
         [Key, Required]
         public int TourId { get; set; }
-        public string Date { get; }
-        public string Time { get; }
         [Required]
         public string GroupName { get; set; }
         [Required]
