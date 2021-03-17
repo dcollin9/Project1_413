@@ -60,7 +60,19 @@ namespace Group1_7_Project1_IS413
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute("Signups",
+                "signups",
+                new { Controller = "Home", action = "Signups", method = "HttpGet" });
+                        
+
+                endpoints.MapControllerRoute("ViewAppointments",
+                "appointments",
+                new { Controller = "Home", action = "ViewAppointments" });
+
+
             });
+
             TimeInfo.EnsurePopulated(app);
         }
 

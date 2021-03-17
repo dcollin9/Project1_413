@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Group1_7_Project1_IS413.Migrations
 {
@@ -13,8 +14,7 @@ namespace Group1_7_Project1_IS413.Migrations
                     TourId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Avail = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Day = table.Column<string>(type: "TEXT", nullable: true),
-                    Time = table.Column<string>(type: "TEXT", nullable: true),
+                    DayTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     GroupName = table.Column<string>(type: "TEXT", nullable: true),
                     GroupSize = table.Column<int>(type: "INTEGER", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: true),

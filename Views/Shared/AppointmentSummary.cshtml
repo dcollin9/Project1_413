@@ -12,22 +12,17 @@
         <thead>
             <tr>
                 <th scope="col">Day</th>
-                <th scope="col">Time</th>
-                <th scope="col">Availability</th>
                 <th scope="col">Reserve</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th>@Model.Day</th>
-                <th>@Model.Time</th>
-                <th>@Model.TourId</th>
+                <th>@Model.DayTime</th>
 
                 <th>
                     <form id="@Model.TourId" asp-page="/Reserve" method="post">
                         <input type="hidden" asp-for="TourId" />
-                        <input type="hidden" asp-for="Day" />
-                        <input type="hidden" asp-for="Time" />
+                        <input type="hidden" asp-for="DayTime" />
                         <input type="hidden" asp-for="Avail" />
                         <span class="card-text p-1">
                             <button type="submit" class="btn-success btn small pull-right" style="float:right">
@@ -37,7 +32,6 @@
                     </form>
                 </th>
             </tr>
-            }
         </tbody>
     </table>
 </div>

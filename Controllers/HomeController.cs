@@ -1,7 +1,9 @@
 ﻿using Group1_7_Project1_IS413.Models;
 using Group1_7_Project1_IS413.Models.ViewModels;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,14 +17,15 @@ namespace Group1_7_Project1_IS413.Controllers
     {
         
         private ITourRepository _repository;
-        private Tour tourData;
         private readonly ILogger<HomeController> _logger;
-
-        public string tourIDa { get; set; }
-        public HomeController(ILogger<HomeController> logger, ITourRepository repository)
+        public IApplicationBuilder _app;
+        private TourDbContext context { get; set; }
+        public HomeController(ILogger<HomeController> logger, ITourRepository repository, TourDbContext con)
         {
             _logger = logger;
-            _repository = repository; 
+            _repository = repository;
+            context = con;
+            
         }
 
         public IActionResult Index()
@@ -38,6 +41,7 @@ namespace Group1_7_Project1_IS413.Controllers
                 return View(new TourListViewModel
                 { Tours = _repository.Tours 
                     .Where (t => t.Avail== true)
+                    .OrderBy(t => t.DayTime)
                 });
             }
             return View();
@@ -46,16 +50,17 @@ namespace Group1_7_Project1_IS413.Controllers
         [HttpPost]
         public IActionResult Signups(Tour tour)
         {
-            //TempStorage.AddTime(timeInfo);
+            
             if (ModelState.IsValid)
             {
+                
                 return View("Form", tour);
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Form()
+        public IActionResult Form(Tour tour)
         {
             if (ModelState.IsValid)
             {
@@ -66,26 +71,29 @@ namespace Group1_7_Project1_IS413.Controllers
         }
 
         [HttpPost]
-        public IActionResult Form(Tour tour)
+        public IActionResult FormPost(Tour tour)
         {
-            TempStorage.AddTime(tour);
-                    return View("Form", tour);
+            
+            tour.Avail = false;
+            context.Tours.Update(tour);
+
+            context.SaveChanges();
+            return View("Index");
         }
 
-        //public IActionResult ViewAppointments ()
-        //{
-         //   if (ModelState.IsValid)
-          //  {
-            //    //Bring in the schedule of availability
-              //  return View(
-                //{
-                  //  Tours = _repository.Tours
-                    //.Where(s => s.GroupName == null)
-                    
-                //});
-            //}; 
-            //return View();
-        //}
+        public IActionResult ViewAppointments(Tour tour)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(new TourListViewModel
+                {
+                    Tours = _repository.Tours
+                    .Where(t => t.Avail == false)
+                    .OrderBy(t => t.DayTime)
+                });
+            }
+            return View("Index");
+        }
 
         public IActionResult Privacy()
         {

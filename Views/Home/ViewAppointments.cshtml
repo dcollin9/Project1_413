@@ -3,15 +3,17 @@
 *@
 @{
 }
-@model IEnumerable<Tour>
+@model Group1_7_Project1_IS413.Models.ViewModels.TourListViewModel
 
-@foreach (Tour x in Model)
+@foreach (var x in Model.Tours)
 {
     <div class="card card-outline-primary m-1 p-1">
         <div class="bg-faded p-1">
             <p>Tour ID: @x.TourId</p>
-            <p>Group Name @x.GroupName</p>
-            <p>Group Size @x.GroupSize</p>
+            <p>Day and Time: @x.DayTime</p>
+            <p>Group Name: @x.GroupName</p>
+            <p>Group Size: @x.GroupSize</p>
+            <p>Phone Number: @x.PhoneNum</p>
             <p>Email: @x.Email</p>
         </div>
     </div>
