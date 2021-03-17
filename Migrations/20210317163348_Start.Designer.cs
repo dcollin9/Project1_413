@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Group1_7_Project1_IS413.Migrations
 {
     [DbContext(typeof(TourDbContext))]
-    [Migration("20210317022901_Initial")]
-    partial class Initial
+    [Migration("20210317163348_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,9 @@ namespace Group1_7_Project1_IS413.Migrations
                 {
                     b.Property<int>("TourId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Avail")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Day")

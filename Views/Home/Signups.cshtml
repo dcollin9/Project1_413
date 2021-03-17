@@ -3,8 +3,10 @@
 
 *@
 @{
+
 }
 @model Group1_7_Project1_IS413.Models.ViewModels.TourListViewModel
+
 
 
 <header>
@@ -13,38 +15,10 @@
     </div>
 </header>
 <div class="text-center">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Day</th>
-                <th scope="col">Time</th>
-                <th scope="col">Reserve</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var x in Model.Tours)
-            {
-                <tr>
-                    <th>@x.Day</th>
-                    <th>@x.Time</th>
-                    <th>
-                        <form id="@x.Day + @x.Time" asp-action="Form" method="post">
-                            <input type="hidden" asp-for="@x.TourId" value="@x.TourId" />
-                            <input type="hidden" asp-for="@x.Day" value="" />
-                            <input type="hidden" asp-for="@x.Time" value="" />
-                            <input type="hidden" asp-for="@x.GroupName" value="" />
-                            <input type="hidden" asp-for="@x.GroupSize" value="" />
-                            <input type="hidden" asp-for="@x.Email" value="" />
-                            <input type="hidden" asp-for="@x.PhoneNum" value="" />
-                            <span class="card-text p-1">
-                                <button type="submit" class="btn-success btn small pull-right" style="float:right">
-                                    Reserve
-                                </button>
-                            </span>
-                        </form>
-                    </th>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @foreach (var x in Model.Tours)
+    {
+        <partial name="AppointmentSummary" model="x" />
+    }
 </div>
+
+

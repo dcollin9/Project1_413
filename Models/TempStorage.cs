@@ -9,15 +9,15 @@ namespace Group1_7_Project1_IS413.Models
 {
     public class TempStorage
     {
-        private static List<TimeInfo> times = new List<TimeInfo>();
-        public static IEnumerable<TimeInfo> Times => times;
-        public static void AddTime(TimeInfo application)
+        private static List<Tour> appointment = new List<Tour>();
+        public static IEnumerable<Tour> Appointment => appointment;
+        public static void AddTime(Tour application)
         {
-            times.Add(application);
+            appointment.Add(application);
         }
-        public static void RemoveTime(TimeInfo application)
+        public static void RemoveTime(Tour application)
         {
-            times.Remove(application);
+            appointment.Remove(application);
         }
     }
 }

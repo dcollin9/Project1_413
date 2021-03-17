@@ -13,8 +13,9 @@ namespace Group1_7_Project1_IS413.Controllers
 {
     public class HomeController : Controller
     {
-        private LearnASPNETMVCWithRealAppsEntities db = new LearnASPNETMVCWithRealAppsEntities();
+        
         private ITourRepository _repository;
+        private Tour tourData;
         private readonly ILogger<HomeController> _logger;
 
         public string tourIDa { get; set; }
@@ -34,31 +35,32 @@ namespace Group1_7_Project1_IS413.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Bring in the schedule of availability
                 return View(new TourListViewModel
-                {
-                    Tours = _repository.Tours
-                    .Where(s => s.GroupName == null)
-                    
+                { Tours = _repository.Tours 
+                    .Where (t => t.Avail== true)
                 });
-            };
+            }
             return View();
         }
 
         [HttpPost]
         public IActionResult Signups(Tour tour)
         {
-            
-            return View("Form", tour);
+            //TempStorage.AddTime(timeInfo);
+            if (ModelState.IsValid)
+            {
+                return View("Form", tour);
+            }
+            return View();
         }
 
         [HttpGet]
-        public IActionResult Form(Tour tour)
+        public IActionResult Form()
         {
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(tour);
+                return View();
             };
             return View();
         }
@@ -66,42 +68,24 @@ namespace Group1_7_Project1_IS413.Controllers
         [HttpPost]
         public IActionResult Form(Tour tour)
         {
-
-            using (var context = new demoCRUDEntities())
-            {
-                // Use of lambda expression to access 
-                // particular record from a database 
-                var data = context.Student.FirstOrDefault(x => x.StudentNo == Studentid);
-                // Checking if any such record exist  
-                if (data != null)
-                {
-                    data.Name = model.Name;
-                    data.Section = model.Section;
-                    data.EmailId = model.EmailId;
-                    data.Branch = model.Branch;
-                    context.SaveChanges();
-                    // It will redirect to  
-                    // the Read method 
-                    return RedirectToAction("Read");
-                }
-                else
-                    return View();
-            }
-
-        public IActionResult ViewAppointments ()
-        {
-            if (ModelState.IsValid)
-            {
-                //Bring in the schedule of availability
-                return View(new TourListViewModel
-                {
-                    Tours = _repository.Tours
-                    .Where(s => s.GroupName == null)
-                    
-                });
-            }; 
-            return View();
+            TempStorage.AddTime(tour);
+                    return View("Form", tour);
         }
+
+        //public IActionResult ViewAppointments ()
+        //{
+         //   if (ModelState.IsValid)
+          //  {
+            //    //Bring in the schedule of availability
+              //  return View(
+                //{
+                  //  Tours = _repository.Tours
+                    //.Where(s => s.GroupName == null)
+                    
+                //});
+            //}; 
+            //return View();
+        //}
 
         public IActionResult Privacy()
         {

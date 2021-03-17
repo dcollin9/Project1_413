@@ -21,6 +21,9 @@ namespace Group1_7_Project1_IS413.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Avail")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Day")
                         .HasColumnType("TEXT");
 
