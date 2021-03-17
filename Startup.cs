@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Group1_7_Project1_IS413.Models.ViewModels;
 
 namespace Group1_7_Project1_IS413
 {
@@ -60,6 +61,7 @@ namespace Group1_7_Project1_IS413
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            TimeInfo.EnsurePopulated(app);
         }
 
     }

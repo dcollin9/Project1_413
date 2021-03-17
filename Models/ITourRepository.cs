@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Group1_7_Project1_IS413.Models
 {
-    public class ITourRepository
+    public interface ITourRepository
     {
         IQueryable<Tour> Tours { get; }
     }

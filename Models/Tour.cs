@@ -10,11 +10,10 @@ namespace Group1_7_Project1_IS413.Models
     {
         [Key, Required]
         public int TourId { get; set; }
-        [Required]
+        public string Day { get; set; }
+        public string Time { get; set; }
         public string GroupName { get; set; }
-        [Required]
         public int GroupSize { get; set; }
-        [Required]
         public string Email { get; set; }
 
         [DataType(DataType.PhoneNumber), RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",

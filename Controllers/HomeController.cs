@@ -1,5 +1,7 @@
 ﻿using Group1_7_Project1_IS413.Models;
+using Group1_7_Project1_IS413.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,12 @@ using System.Threading.Tasks;
 namespace Group1_7_Project1_IS413.Controllers
 {
     public class HomeController : Controller
-    {   private ITourRepository _repository;
+    {
+        private LearnASPNETMVCWithRealAppsEntities db = new LearnASPNETMVCWithRealAppsEntities();
+        private ITourRepository _repository;
         private readonly ILogger<HomeController> _logger;
 
+        public string tourIDa { get; set; }
         public HomeController(ILogger<HomeController> logger, ITourRepository repository)
         {
             _logger = logger;
@@ -24,46 +29,77 @@ namespace Group1_7_Project1_IS413.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Signups()
         {
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new Tour
+                return View(new TourListViewModel
                 {
                     Tours = _repository.Tours
-                    .Where(s => available == false)
-                    .OrderbBy(s => Time)
+                    .Where(s => s.GroupName == null)
+                    
                 });
             };
             return View();
         }
-        public IActionResult Form()
+
+        [HttpPost]
+        public IActionResult Signups(Tour tour)
+        {
+            
+            return View("Form", tour);
+        }
+
+        [HttpGet]
+        public IActionResult Form(Tour tour)
         {
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new TourViewModel
-                {
-                    Schedule = _repository.Tours
-                    .Where(s => available == false)
-                    .OrderbBy(s => Time)
-                });
+                return View(tour);
             };
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Form(Tour tour)
+        {
+
+            using (var context = new demoCRUDEntities())
+            {
+                // Use of lambda expression to access 
+                // particular record from a database 
+                var data = context.Student.FirstOrDefault(x => x.StudentNo == Studentid);
+                // Checking if any such record exist  
+                if (data != null)
+                {
+                    data.Name = model.Name;
+                    data.Section = model.Section;
+                    data.EmailId = model.EmailId;
+                    data.Branch = model.Branch;
+                    context.SaveChanges();
+                    // It will redirect to  
+                    // the Read method 
+                    return RedirectToAction("Read");
+                }
+                else
+                    return View();
+            }
+
         public IActionResult ViewAppointments ()
         {
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new ScheduleViewModel
+                return View(new TourListViewModel
                 {
-                    Schedule = _repository.Schedule
-                    .Where(s => available == false)
-                    .OrderbBy(s => Date && Time)
-                })
-            };
+                    Tours = _repository.Tours
+                    .Where(s => s.GroupName == null)
+                    
+                });
+            }; 
             return View();
         }
 

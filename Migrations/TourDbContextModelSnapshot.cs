@@ -21,18 +21,22 @@ namespace Group1_7_Project1_IS413.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Day")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroupName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("GroupSize")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PhoneNum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Time")
                         .HasColumnType("TEXT");
 
                     b.HasKey("TourId");
