@@ -4,7 +4,7 @@
 *@
 @{
 }
-@model IEnumerable<Group1_7_Project1_IS413.Models.TimeInfo>
+@model IEnumerable<Group1_7_Project1_IS413.Models.ViewModels.TimeInfo>
 
 
 <header>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Group1_7_Project1_IS413.Models.TimeInfo x in Model)
+            @foreach (Group1_7_Project1_IS413.Models.ViewModels.TimeInfo x in Model)
             {
                 <tr>
                     <th>@x.Day</th>

@@ -3,3 +3,23 @@
 *@
 @{
 }
+@model Tour
+<form asp-action="Form" method="post">
+    <div>
+        <label asp-for="GroupName">Name of Group:</label>
+        <input asp-for="GroupName" />
+    </div>
+    <div>
+        <label asp-for="GroupSize">Size of Group:</label>
+        <input asp-for="GroupSize" />
+    </div>
+    <div>
+        <label asp-for="Email">Email Address:</label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="PhoneNum">Phone Number:</label>
+        <input asp-for="PhoneNum" />
+    </div>
+    <button type="submit">Submit your Reservation!</button>
+</form>

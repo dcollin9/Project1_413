@@ -15,5 +15,6 @@ namespace Group1_7_Project1_IS413.Models
         }
         //sets the database to hold the projects
         public DbSet<Tour> Tours { get; set; }
+        
     }
 }

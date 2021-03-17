@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 namespace Group1_7_Project1_IS413.Controllers
 {
     public class HomeController : Controller
-    {
+    {   private ITourRepository _repository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITourRepository repository)
         {
             _logger = logger;
+            _repository = repository; 
         }
 
         public IActionResult Index()
@@ -28,13 +29,14 @@ namespace Group1_7_Project1_IS413.Controllers
             if (ModelState.IsValid)
             {
                 //Bring in the schedule of availability
-                return View(new TourViewModel
+                return View(new Tour
                 {
                     Tours = _repository.Tours
                     .Where(s => available == false)
                     .OrderbBy(s => Time)
-                })
-            }
+                });
+            };
+            return View();
         }
         public IActionResult Form()
         {
@@ -46,8 +48,9 @@ namespace Group1_7_Project1_IS413.Controllers
                     Schedule = _repository.Tours
                     .Where(s => available == false)
                     .OrderbBy(s => Time)
-                })
-            }
+                });
+            };
+            return View();
         }
         public IActionResult ViewAppointments ()
         {
@@ -60,7 +63,8 @@ namespace Group1_7_Project1_IS413.Controllers
                     .Where(s => available == false)
                     .OrderbBy(s => Date && Time)
                 })
-            }
+            };
+            return View();
         }
 
         public IActionResult Privacy()

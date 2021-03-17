@@ -3,3 +3,16 @@
 *@
 @{
 }
+@model IEnumerable<Tour>
+
+@foreach (Tour x in Model)
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <p>Tour ID: @x.TourId</p>
+            <p>Group Name @x.GroupName</p>
+            <p>Group Size @x.GroupSize</p>
+            <p>Email: @x.Email</p>
+        </div>
+    </div>
+}
