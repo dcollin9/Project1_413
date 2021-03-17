@@ -15,5 +15,9 @@ namespace Group1_7_Project1_IS413.Models
         {
             times.Add(application);
         }
+        public static void RemoveTime(TimeInfo application)
+        {
+            times.Remove(application);
+        }
     }
 }
