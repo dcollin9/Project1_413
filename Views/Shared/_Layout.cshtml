@@ -1,14 +1,19 @@
-﻿<!DOCTYPE html>
+﻿<!--The layout pages that serves as a base for all of the other views-->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - Group1_7_Project1_IS413</title>
+
+    <!--Brings in bootstrap libraries-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
+
+        <!--Navbar that allows us to navigate between pages-->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Group 1-7 Project 1</a>
@@ -34,6 +39,8 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
+            <!--Brings in the other views right here-->
             @RenderBody()
         </main>
     </div>

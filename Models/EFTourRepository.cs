@@ -14,6 +14,8 @@ namespace Group1_7_Project1_IS413.Models
         {
             _context = context;
         }
+
+        
         public IQueryable<Tour> Tours => _context.Tours;
     }
 }

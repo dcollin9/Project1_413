@@ -20,6 +20,8 @@ namespace Group1_7_Project1_IS413.Controllers
         private readonly ILogger<HomeController> _logger;
         public IApplicationBuilder _app;
         private TourDbContext context { get; set; }
+
+        //constructor for the home controller
         public HomeController(ILogger<HomeController> logger, ITourRepository repository, TourDbContext con)
         {
             _logger = logger;
@@ -28,16 +30,20 @@ namespace Group1_7_Project1_IS413.Controllers
             
         }
 
+        //returns the home page
         public IActionResult Index()
         {
             return View();
         }
 
+
+        //grabs the signup page, which allows the user to select an appointment date and time to sign up for
         [HttpGet]
         public IActionResult Signups()
         {
             if (ModelState.IsValid)
             {
+                //passes in appointments from the database if the appointments are available
                 return View(new TourListViewModel
                 { Tours = _repository.Tours 
                     .Where (t => t.Avail== true)
@@ -47,18 +53,20 @@ namespace Group1_7_Project1_IS413.Controllers
             return View();
         }
 
+        //submits the appointment from the signups page
         [HttpPost]
         public IActionResult Signups(Tour tour)
         {
             
             if (ModelState.IsValid)
             {
-                
+                //calls the Form view, and passes the selected tour to it
                 return View("Form", tour);
             }
             return View();
         }
 
+        //returns the page where the user submits their information and signs up for a specific tour
         [HttpGet]
         public IActionResult Form(Tour tour)
         {
@@ -70,21 +78,28 @@ namespace Group1_7_Project1_IS413.Controllers
             return View();
         }
 
+        //submits the person/group's imformation to book the tour. This updates the database
         [HttpPost]
         public IActionResult FormPost(Tour tour)
         {
             
             tour.Avail = false;
+
+            //updates database to include the new information entered in by the user (appointment information)
             context.Tours.Update(tour);
 
             context.SaveChanges();
             return View("Index");
         }
 
+
+        //returns a view that shows all of the appointments that have been made
         public IActionResult ViewAppointments(Tour tour)
         {
             if (ModelState.IsValid)
             {
+
+                //returns all appointments (tours) that are no longer available (have already been booked)
                 return View(new TourListViewModel
                 {
                     Tours = _repository.Tours

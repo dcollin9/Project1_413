@@ -61,11 +61,12 @@ namespace Group1_7_Project1_IS413
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                //this endpoint takes the user to the Signups page when the user types the word "signups"
                 endpoints.MapControllerRoute("Signups",
                 "signups",
                 new { Controller = "Home", action = "Signups", method = "HttpGet" });
-                        
 
+                //this endpoint takes the user to the ViewAppointments page when the user types the word "appointments"
                 endpoints.MapControllerRoute("ViewAppointments",
                 "appointments",
                 new { Controller = "Home", action = "ViewAppointments" });
@@ -73,6 +74,7 @@ namespace Group1_7_Project1_IS413
 
             });
 
+            //seeds the database upon startup if one is not already selected
             TimeInfo.EnsurePopulated(app);
         }
 

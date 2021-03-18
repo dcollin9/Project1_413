@@ -23,6 +23,8 @@ namespace Group1_7_Project1_IS413.Models
             if (!context.Tours.Any())
             {
                 context.Tours.AddRange(
+
+                    //data that will be used to seed the database
                 new Tour
                 {
                     DayTime = new DateTime(2021, 03, 22, 8,0,0),

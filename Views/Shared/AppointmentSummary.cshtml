@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!--Is a partial view that brings the appointment information in for each available appointment in the signups page-->
 @model Tour
 
 
@@ -20,6 +16,8 @@
                 <th>@Model.DayTime</th>
 
                 <th>
+
+                    <!--Form so the user can submit information about each property of the appointments (date, time, availability)-->
                     <form id="@Model.TourId" asp-page="/Reserve" method="post">
                         <input type="hidden" asp-for="TourId" />
                         <input type="hidden" asp-for="DayTime" />
